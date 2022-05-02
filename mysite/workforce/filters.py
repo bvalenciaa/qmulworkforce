@@ -1,7 +1,5 @@
 import django_filters
 from .models import *
-from datetime import datetime
-from calendar import HTMLCalendar
 
 
 class TaskFilter(django_filters.FilterSet):
