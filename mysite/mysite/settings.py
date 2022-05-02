@@ -23,9 +23,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-$+@lw1)g71z%el1xqe5_dqqj4pd7zm+&0ahq8@lx&l)0@+p*9q'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['https://qmulworkforce.herokuapp.com', '127.0.0.1']
+ALLOWED_HOSTS = []
 
 # Application definition
 
@@ -80,10 +80,10 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'demo_1',
-        'USER': 'blancavalencia',
+        'NAME': 'DEMO_TEST',
+        'USER': 'postgres',
         'PASSWORD': 'muffinpower',
-        'HOST': 'database-1.cgmn4i52tcsh.eu-west-2.rds.amazonaws.com',
+        'HOST': 'localhost',
         'PORT': '5432',
 
     }
