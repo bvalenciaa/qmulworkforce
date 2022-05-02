@@ -1,0 +1,18 @@
+{%  extends 'workforce/index.html' %}
+{% block content %}
+
+<div class="m-4">
+    <h3>New Work</h3>
+    <input type="button" value="Go Back" onclick="history.back()"><br><br>
+
+    <div class="modal-body">
+        <form method="POST" action="">
+            {% csrf_token %}
+            {{form.media}}
+            {{form.as_p}}
+            <input type="submit" name="Submit">
+        </form>
+    </div>
+</div>
+
+{% endblock %}

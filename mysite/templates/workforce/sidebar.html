@@ -1,0 +1,35 @@
+
+    <div class="profileImage" style="margin-bottom: 20px; margin-top: 20px;">
+        <img class="profileImage" style="max-width: 200px; max-height: 200px; margin: 0 auto; border-radius: 50%;"
+             src="{{request.user.member.image.url}}"><br><br>
+        <h3>Hi there, {{ request.user.member.firstname }}!</h3>
+    </div>
+    <a href="{% url 'profile' %}">
+        <button type="button" class="btn btn-sm text-center" style="background-color: #84A59D; color: white; width: 80%">
+            Profile
+        </button>
+    </a><br><br>
+    <button type="button" class="btn btn-sm text-center" style="background-color: #84A59D; color: white; width: 80%">
+        Settings
+    </button>
+    <br><br>
+
+    <i class="fa fa-sign-out" aria-hidden="true"></i>
+    <span><a href="{% url 'logout'%}">Logout</a></span>
+
+    <hr/>
+    <div class="userTeam align-bottom">
+        <div class="list-group">
+            {% if team_id %}
+                <h4>{{request.user.member.team}} Team</h4>
+                <p class="lead">Contact your team anytime!</p>
+                {% for i in team_members %}
+                    <li class="list-group-item">{{i.name}}</li>
+                {% endfor %}
+            {% else %}
+                <h4>Join A Team</h4>
+                <p>You don't have a team yet! Please contact <a href="mailto:admin@workforce.com">admin@workforce.com</a> or your team manager to adjust this.</p>
+            {% endif %}
+
+        </div>
+    </div>

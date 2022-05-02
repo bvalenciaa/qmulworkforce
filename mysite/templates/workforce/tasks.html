@@ -1,0 +1,103 @@
+{%  extends 'workforce/index.html' %}
+{% block content %}
+
+<div class="m-4">
+    <h2>TASKS</h2>
+    <p class="lead">Use this section to create and manage your upcoming and completed tasks.</p>
+
+    <button type="button" class="btn btn-block mb-4" style="background-color: #84A59D; color: white;" data-bs-toggle="modal" data-bs-target="#newTaskModal">Add New Task</button>
+
+    <div class="modal" id="newTaskModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form method="POST" action="">
+                        {% csrf_token %}
+                        {{form.as_p}}
+                        <input type="submit" name="Submit">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="text-center">
+            <form method="get">
+                {{myFilter.form}}
+                <button class="btn" style="background-color: #002642; color: white;" type="submit">Search</button>
+            </form>
+        </div>
+    </div><br>
+
+
+    <div class="col-md">
+        <div class="shadow-4 rounded-5 overflow-hidden">
+            <table class="table align-middle mb-0 bg-white">
+                <thead class="bg-light">
+                <tr>
+                    <th></th>
+                    <th>Title</th>
+                    <th>Assigned To</th>
+                    <th>Date</th>
+                    <th>Status</th>
+                    <th>Tick Off</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+
+                {% for i in tasks %}
+                <tbody>
+                <tr>
+                    <td>
+                        <img class="profileImage" style="max-width: 50px; max-height: 50px; margin: 0 auto; border-radius: 50%" src="{{i.user.image.url}}"><br><br>
+                    </td>
+                    <td>
+                        <div class="ms-3">
+                            <p class="fw-bold mb-1">{{i.title}}</p>
+                            <p class="text-muted mb-0">{{i.content}}</p>
+                        </div>
+                    </td>
+
+                    <td>
+                        <p class="fw-normal mb-1">{{i.user}}</p>
+                    </td>
+
+                    <td>
+                        <p class="fw-normal mb-1">{{i.date}}</p>
+                    </td>
+
+                    <td>
+                        {% if i.complete == True %}
+                            <button type="button" class="btn btn-success btn-sm" disabled>Done</button>
+                        {% else %}
+                            <button type="button" class="btn btn-danger btn-sm" disabled>To Do</button>
+                        {% endif %}
+                    </td>
+
+                    <td>
+                        {% if i.complete == True %}
+                            <input name="done" class="done" type="checkbox" checked>
+                        {% else %}
+                            <input name="done" class="done" type="checkbox">
+                        {% endif %}
+
+                    </td>
+
+                    <td class="text-center">
+                        <a href="{% url 'edit_task' i.id %}"><i class="fa-solid fa-pen" style="color: black;"></i></a>
+                        <a href="{% url 'delete_task' i.id %}"><i class="fa-solid fa-x" style="color: black;"></i></a>
+                    </td>
+                </tr>
+                </tbody>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+

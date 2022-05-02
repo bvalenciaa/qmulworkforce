@@ -1,0 +1,16 @@
+{% load static %}
+
+<nav class="navbar navbar-expand-lg">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <div class="navbar-nav nav-fill w-100">
+      <a class="nav-item nav-link active" style="background-color: #F6BD60; color: white;" href="{% url 'home' %}">Home<span class="sr-only">(current)</span></a>
+      <a class="nav-item nav-link" style="background-color: #F5CAC3; color: white;" href="{% url 'tasks' %}">Tasks</a>
+      <a class="nav-item nav-link" style="background-color: #F28482; color: white;" href="{% url 'hub' %}">Hub</a>
+      <a class="nav-item nav-link" style="background-color: #84A59D; color: white;" href="{% url 'work' %}">Work</a>
+      <a class="nav-item nav-link" style="background-color: #002642; color: white;" href="{% url 'media' %}">Media</a>
+    </div>
+  </div>
+</nav>

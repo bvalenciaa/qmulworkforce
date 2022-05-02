@@ -1,0 +1,37 @@
+{%  extends 'workforce/index.html' %}
+
+{% block content %}
+
+<div class="row m-4">
+    <h2>MEDIA</h2>
+    <p class="lead">Upload and manage your team's files</p><br><br>
+
+    <form method="POST" action="" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{form.as_p}}
+        <input type="submit" name="Submit">
+    </form>
+
+    <table class="table">
+        <tr>
+            <th>Name</th>
+            <th>File</th>
+            <th>Actions</th>
+        </tr>
+
+        {% for i in uploads %}
+        <tr>
+            <td>{{i.title}}</td>
+            <td>{{i.upload}}</td>
+
+            <td>
+                <a href="{% url 'edit_file' i.id %}"><i class="fa-solid fa-pen" style="color: black;"></i></a>
+                <a href="{% url 'delete_file' i.id %}"><i class="fa-solid fa-x" style="color: black;"></i></a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+
+
+{% endblock %}

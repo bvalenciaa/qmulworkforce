@@ -1,0 +1,55 @@
+{%  extends 'workforce/index.html' %}
+{% block content %}
+
+<div class="row m-4">
+    <h2>WORK</h2>
+    <p class="lead">You have reached the workspace.</p><br><br>
+
+    <div class="row">
+        <div class="col-sm-9">
+            <a href="{% url 'new_work' %}">
+        <button type="button" class="btn text-center" style="background-color: #84A59D; color: white; width: 100%">New Work</button></a><br><br>
+        </div>
+        <div class="col-sm-3">
+                <div>
+                    <button class="btn dropdown-toggle" id="dropdownMenu" data-bs-toggle="dropdown" aria-expanded="false" style="background-color: #84A59D; color: white; width: 90%">Choose a Template</button>
+
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu">
+                        {% for i in works %}
+                        {% if i.template == True %}
+                            <li><a class="dropdown-item" href="{% url 'edit_work' i.id %}">{{i.title}}</a></li>
+                        {% endif %}
+                        {% endfor %}
+                    </ul>
+                </div><br><br>
+        </div>
+    </div>
+
+
+    <table class="table">
+        <tr>
+            <th>Title</th>
+            <th>Date</th>
+            <th>Creator</th>
+            <th>Actions</th>
+        </tr>
+
+        {% for i in works %}
+
+            {% if i.template == False %}
+                <tr>
+                    <td><a href="{% url 'work_detail' i.id %}">{{i.title}}</a></td>
+                    <td>{{i.created}}</td>
+                    <td>{{i.user}}</td>
+
+                    <td>
+                        <a href="{% url 'edit_work' i.id %}"><i class="fa-solid fa-pen" style="color: black;"></i></a>
+                        <a href="{% url 'delete_work' i.id %}"><i class="fa-solid fa-x" style="color: black;"></i></a>
+                    </td>
+                </tr>
+            {% endif %}
+        {% endfor %}
+    </table>
+</div>
+
+{% endblock %}

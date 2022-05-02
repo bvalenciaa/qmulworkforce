@@ -1,0 +1,16 @@
+{%  extends 'workforce/index.html' %}
+{% block content %}
+
+<div class="m-4">
+    <h3>Delete Task</h3>
+
+    <p>Are you sure you want to delete "{{work.title}}"?</p>
+    <input type="button" value="Cancel" onclick="history.back()"><br><br>
+
+    <form method="POST" action="">
+        {% csrf_token %}
+        <input type="submit" name="Confirm">
+    </form>
+</div>
+
+{% endblock %}

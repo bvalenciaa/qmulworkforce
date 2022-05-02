@@ -1,0 +1,18 @@
+{%  extends 'workforce/index.html' %}
+{% block content %}
+
+<div class="m-4">
+    <a href="{% url 'work' %}">
+        <button type="button" class="btn btn-sm text-center" style="background-color: #84A59D; color: white;">
+            Go Back
+        </button>
+    </a><br><br>
+    <h1>{{work.title}}</h1>
+    <p>By {{work.user}}</p><hr>
+    <p>Created on {{work.created}}</p>
+
+    {{work.content}}
+
+</div>
+
+{% endblock %}

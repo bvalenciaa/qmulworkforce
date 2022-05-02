@@ -1,0 +1,139 @@
+{%  extends 'workforce/index.html' %}
+{% block content %}
+
+    <div class="row m-4">
+        <h2>HOME</h2>
+        <div class="col-sm">
+            <div class="card">
+                <div class="card-body">
+                    <h4>Announcements</h4>
+                </div>
+                <div class="card" style="height:300px; overflow-y:scroll;">
+                    <table class="table bg-white">
+                        {% for i in announcements %}
+                        <tbody>
+                        <tr>
+                            <td>
+                                <img class="profileImage" style="max-width: 50px; max-height: 50px; margin: 0 auto; border-radius: 50%" src="{{i.user.image.url}}">
+                            </td>
+                            <td>
+                                <p class="align-middle">{{i.content}}</p>
+                            </td>
+                        </tr>
+                        </tbody>
+                        {% endfor %}
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-5">
+            <div class="modal" id="newTaskModal">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                        </div>
+                        <div class="modal-body">
+                            <h3 class="text-center">Add a new task</h3>
+                            <form method="POST" action="">
+                                {% csrf_token %}
+                                {{form.as_p}}
+                                <input type="submit" name="Submit">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-body">
+                    <h4 style="margin: 0; display: inline-block;">{{ request.user.member.name }}'s Tasks  </h4>
+                    <button type="button" class="btn" style="background-color: #84A59D; color: white; margin-left: 60px" data-bs-toggle="modal" data-bs-target="#newTaskModal"><i class="fa fa-plus" aria-hidden="true"></i></button>
+                </div>
+                <div class="card" style="height:300px; overflow-y:scroll;">
+                    <table class="table align-middle mb-0 bg-white">
+                        <thead class="bg-light">
+                        <tr>
+                            <th>Title</th>
+                            <th>Due Date</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                        </thead>
+
+                        {% for i in member_tasks %}
+                        <tbody>
+                        <tr>
+                            <td>
+                                <div class="ms-3">
+                                    <p class="fw-bold mb-1">{{i.title}}</p>
+                                </div>
+                            </td>
+
+                            <td>
+                                <p class="fw-normal mb-1">{{i.date}}</p>
+                            </td>
+
+                            <td>
+                                {% if i.complete == True %}
+                                <button type="button" class="btn btn-success btn-sm" disabled>Done</button>
+                                {% else %}
+                                <button type="button" class="btn btn-danger btn-sm" disabled>To Do</button>
+                                {% endif %}
+                            </td>
+
+                            <td class="text-center">
+                                <a href="{% url 'edit_task' i.id %}"><i class="fa-solid fa-pen"
+                                                                        style="color: black;"></i></a>
+                                <a href="{% url 'delete_task' i.id %}"><i class="fa-solid fa-x"
+                                                                          style="color: black;"></i></a>
+                            </td>
+                        </tr>
+                        </tbody>
+                        {% endfor %}
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row m-4">
+        <div class="week" style="background: #84A59D; text-align: center; color: white; ">
+            <i class="fa fa-arrow-circle-left" aria-hidden="true" style="float:left; margin-top: 15px"></i>
+            <i class="fa fa-arrow-circle-right" aria-hidden="true" style="float:right; margin-top: 15px"></i>
+            <h4 style="margin-top: 10px">Week At A Glance</h4>
+        </div>
+
+        <table class="table">
+            <thead>
+            <th scope="col">Monday</th>
+            <th scope="col">Tuesday</th>
+            <th scope="col">Wednesday</th>
+            <th scope="col">Thursday</th>
+            <th scope="col">Friday</th>
+            </thead>
+            <tbody>
+            <td>
+                <button type="button" class="btn btn-info btn-sm mb-1" disabled>Meeting with Client 12am</button><br>
+                <button type="button" class="btn btn-warning btn-sm mb-1" disabled>Deliverables Due at 5pm</button>
+            </td>
+            <td>
+                <button type="button" class="btn btn-danger btn-sm mb-1" disabled>Social Volleyball 3pm</button><br>
+                <button type="button" class="btn btn-success btn-sm mb-1" disabled>UX Meeting 1pm</button>
+
+            </td>
+            <td>
+                <button type="button" class="btn btn-warning btn-sm mb-1" disabled>Risk Assessment Report 9am</button><br>
+                <button type="button" class="btn btn-success btn-sm mb-1" disabled>Graduate Tour 4pm</button>
+            </td>
+            <td>
+                <button type="button" class="btn btn-warning btn-sm mb-1" disabled>R&D Success Chart 9am</button><br>
+            </td>
+            <td>
+                <button type="button" class="btn btn-success btn-sm mb-1" disabled>KPI Meeting 10am</button><br>
+                <button type="button" class="btn btn-danger btn-sm mb-1" disabled>Bingo Night 8pm</button>
+            </td>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock %}
